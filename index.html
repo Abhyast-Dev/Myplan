@@ -104,5 +104,14 @@
   <div id="pdfTemplate" class="hidden"><div class="pdf-report"><div class="report-head"><div style="display:flex;gap:14px;align-items:center"><img src="logo.png" class="report-logo"><div><h1 style="margin:0;color:#272b6a">My Plan</h1><p style="margin:2px 0;color:#ee4977;font-weight:bold">Progress Report</p></div></div><div style="text-align:right;font-size:12px"><p>Student: <b id="reportName"></b></p><p>Generated: <b id="reportDate"></b></p></div></div><p><b id="reportTitle"></b></p><p id="reportOverall"></p><div id="reportRows"></div><div class="report-footer">© 2026 Abhyast Private Limited. ABLE™ and TAKECARE™ Registered Frameworks.</div></div></div>
 
   <script src="js/parser.js"></script><script src="js/app.js"></script>
+   <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("Service Worker Registered"))
+          .catch(err => console.error("SW registration failed:", err));
+      });
+    }
+  </script>
 </body>
 </html>
