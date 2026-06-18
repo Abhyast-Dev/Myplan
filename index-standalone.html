@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Plan</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+:root{
+  --yellow:#fde32d;
+  --pink:#ee4977;
+  --navy:#272b6a;
+  --aqua:#4bc2c4;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --soft:#f8fafc;
+  --gradient:linear-gradient(135deg,#272b6a 0%,#35498c 48%,#4bc2c4 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#f8fbfc 0%,#eef8f8 100%);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+button,input,textarea{font:inherit}.hidden{display:none!important}
+.hero{background:var(--gradient);color:#fff}.wrap{max-width:1180px;margin:auto;padding:0 20px}.header-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 20px}.brand{display:flex;align-items:center;gap:14px}.logo{width:56px;height:56px;object-fit:contain;border-radius:14px;background:#fff}.brand h1{margin:0;font-size:34px;line-height:1;font-weight:900;letter-spacing:-.04em}.brand p{margin:6px 0 0;color:rgba(255,255,255,.86);font-size:15px}.tabs{display:flex;gap:6px;background:rgba(255,255,255,.12);padding:6px;border-radius:15px;flex-wrap:wrap}.tab{border:0;background:transparent;color:rgba(255,255,255,.88);font-weight:800;padding:10px 14px;border-radius:11px;cursor:pointer}.tab.active{background:#fff;color:var(--navy);box-shadow:0 8px 20px rgba(0,0,0,.13)}
+main{flex:1}.card{background:rgba(255,255,255,.96);border:1px solid rgba(39,43,106,.11);border-radius:24px;box-shadow:0 12px 35px rgba(39,43,106,.07)}.section{padding:28px;margin:26px 0}.title{font-size:28px;margin:0 0 8px;font-weight:900;letter-spacing:-.03em}.muted{color:var(--muted)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.field label{display:block;font-size:13px;font-weight:900;margin-bottom:8px}.input{width:100%;border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:#fff;outline:none}.input:focus{border-color:var(--aqua);box-shadow:0 0 0 4px rgba(75,194,196,.18)}.btn{border:0;border-radius:16px;padding:13px 18px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}.btn.primary{background:var(--navy);color:white}.btn.pink{background:var(--pink);color:#fff}.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.aqua{background:var(--aqua);color:#052f36}.btn.warn{background:#fff5f7;color:#be123c;border:1px solid #fecdd3}.btn.small{font-size:12px;padding:8px 10px;border-radius:10px}.actions{display:flex;gap:10px;flex-wrap:wrap}.status{margin-top:14px;font-size:14px;color:var(--muted)}
+.onboard{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start}.how{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px}.how ol{margin:10px 0 0;padding-left:22px}.how li{margin:8px 0}.or{font-weight:900;color:var(--muted);align-self:center}.file-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;background:#f1f5f9;font-size:12px;font-weight:800;color:#334155}.progressbar{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}.progressbar span{display:block;height:100%;background:linear-gradient(90deg,var(--aqua),var(--navy));border-radius:inherit}.mini-stat{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:16px}.mini-stat b{display:block;font-size:28px;color:var(--navy)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}.search{max-width:360px}.tree{font-size:15px}.node{border:1px solid var(--line);background:#fff;border-radius:16px;margin-bottom:10px;overflow:hidden}.node-head{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer}.node-head:hover{background:#f8fafc}.chev{font-size:12px;color:var(--muted);transition:transform .15s}.open>.node-head .chev{transform:rotate(90deg)}.node-title{font-weight:900;flex:1}.node-meta{font-size:12px;color:var(--muted);font-weight:700}.node-children{display:none;padding:0 14px 14px 30px;border-top:1px solid #f1f5f9}.open>.node-children{display:block}.chapter{border-left:4px solid rgba(75,194,196,.55)}.topic-row{display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:12px}.topic-row:hover{background:#f8fafc}.topic-row input{width:18px;height:18px}.topic-name{flex:1}.topic-actions{opacity:.7}.empty{text-align:center;color:var(--muted);padding:50px 20px}.danger-zone{border:1px solid #fecdd3;background:#fff7f7;border-radius:18px;padding:18px}.chart-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}.chart-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;min-height:320px}.review-card{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff;margin-bottom:12px}.footer{border-top:1px solid var(--line);background:#fff;margin-top:30px}.footer-container{max-width:1180px;margin:auto;padding:18px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:#334155;font-size:14px}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer-links span{white-space:nowrap}
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}.modal{background:#fff;border-radius:22px;max-width:560px;width:100%;box-shadow:0 25px 80px rgba(0,0,0,.25);overflow:hidden}.modal-head{background:var(--navy);color:#fff;padding:18px 20px}.modal-body{padding:20px}.modal-foot{display:flex;justify-content:flex-end;gap:10px;background:#f8fafc;padding:14px 20px}.state-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.state{border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px;text-align:left;font-weight:800;cursor:pointer}.state.selected{border-color:var(--pink);background:#fff5f8}.pdf-report{background:#fff;color:#111;padding:36px;font-family:Arial,sans-serif}.report-head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--navy);padding-bottom:16px;margin-bottom:20px}.report-logo{width:60px;height:60px;object-fit:contain}.report-row{border:1px solid #e2e8f0;padding:12px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;gap:16px}.report-footer{margin-top:22px;border-top:1px solid #e2e8f0;padding-top:10px;font-size:10px;color:#64748b}
+@media(max-width:900px){.header-inner,.onboard,.grid2,.grid3,.chart-grid{grid-template-columns:1fr;display:grid}.header-inner{align-items:flex-start}.brand h1{font-size:28px}.tabs{width:100%}.tab{flex:1}.section{padding:20px;margin:16px 0}.node-children{padding-left:16px}.footer-container{display:block}.footer-links{margin-bottom:10px}}
+@media print{body>*:not(#pdfTemplate){display:none!important}#pdfTemplate{display:block!important}.pdf-report{padding:0}}
+
+/* Final simplicity pass: calmer, lighter UI with ABHYAST accents used sparingly */
+:root{--gradient:linear-gradient(135deg,#ffffff 0%,#f7ffff 58%,#eefafa 100%)}
+.hero{background:var(--gradient);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:0 8px 28px rgba(39,43,106,.05)}
+.brand p{color:var(--muted)}
+.tabs{background:#f8fafc;border:1px solid var(--line)}
+.tab{color:var(--navy)}
+.tab.active{background:#e9fbfb;color:#0f3f45;box-shadow:none}
+.btn.primary{background:var(--pink);color:#fff}
+.btn.soft{background:#eefafa;color:#0f3f45;border:1px solid rgba(75,194,196,.35)}
+.btn.aqua{background:#eefafa;color:#0f3f45;border:1px solid rgba(75,194,196,.35)}
+.node{box-shadow:0 4px 16px rgba(15,23,42,.03)}
+.node-title{font-weight:850}.chapter{border-left:4px solid rgba(75,194,196,.45)}
+.topic-row{cursor:pointer}.topic-row .btn{opacity:.75}.topic-row:hover .btn{opacity:1}
+.status-dot{width:16px;height:16px;border-radius:999px;border:1px solid var(--line);display:inline-block;flex:0 0 auto;background:#f1f5f9;cursor:pointer}
+.state-empty{background:#f1f5f9}.state-well{background:#4bc2c4;border-color:#4bc2c4}.state-prepared{background:#fde32d;border-color:#eab308}.state-preparing{background:#ee4977;border-color:#ee4977}.state-not{background:#cbd5e1;border-color:#94a3b8}
+.state-label{font-size:12px;color:var(--muted);min-width:96px;text-align:right}.state small{display:block;color:var(--muted);font-weight:600;margin-top:4px;line-height:1.3}.state{display:grid;grid-template-columns:20px 1fr;column-gap:8px;align-items:start}.state small{grid-column:2}.state:hover{border-color:var(--aqua);background:#f7ffff}.modal-head.gentle{background:#f8fafc;color:var(--ink);border-bottom:1px solid var(--line)}.note-label{display:block;margin-top:16px}.gentle-modal{border:1px solid var(--line)}
+.progressbar span{background:linear-gradient(90deg,var(--aqua),var(--pink))}
+@media(max-width:900px){.state-label{display:none}.header-inner{display:flex}.tabs{overflow:auto;flex-wrap:nowrap}.tab{white-space:nowrap}}
+.performance-controls{margin-top:18px;max-width:360px}
+.exam-list{margin-top:18px}
+.exam-subjects{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.exam-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:10px;background:#fff}
+.exam-subject-name{font-weight:900;color:var(--navy)}
+@media(max-width:700px){.exam-row{grid-template-columns:1fr}.chart-grid{grid-template-columns:1fr}}
+
+</style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img src="logo.png" alt="ABHYAST logo" class="logo" onerror="this.style.display='none'" />
+        <div><h1>My Plan</h1><p>Upload your syllabus. Track it your way.</p></div>
+      </div>
+      <nav class="tabs" aria-label="Main navigation">
+        <button class="tab active" data-tab="setup">Start</button>
+        <button class="tab" data-tab="tracker">Syllabus</button>
+        <button class="tab" data-tab="progress">Progress</button>
+        <button class="tab" data-tab="performance">Performance</button>
+        <button class="tab" data-tab="review">Review</button>
+        <button class="tab" data-tab="settings">Settings</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card section" id="setupCard">
+      <div id="emptyMessage"><h2 class="title">Start with your syllabus</h2><p class="muted">No sample data is loaded. Add your name and upload a PDF syllabus or import JSON to begin.</p></div>
+      <div id="loadedMessage" class="hidden muted"></div>
+      <div class="onboard" style="margin-top:24px">
+        <div>
+          <div class="grid2">
+            <div class="field"><label for="studentName">Student name</label><input class="input" id="studentName" placeholder="Enter name" /></div>
+            <div class="field"><label for="pdfFile">Upload syllabus PDF</label><input class="input" type="file" id="pdfFile" accept="application/pdf,.pdf" /></div>
+          </div>
+          <div class="actions" style="margin-top:18px">
+            <button class="btn primary" id="readPdfBtn">Read PDF</button>
+            <label class="btn ghost" for="jsonFile">Import JSON</label>
+            <input class="hidden" type="file" id="jsonFile" accept="application/json,.json" />
+          </div>
+          <p class="status" id="status">PDFs are read in your browser. Your data stays on this device.</p>
+        </div>
+        <aside class="how">
+          <h3 style="margin:0">How to use</h3>
+          <ol>
+            <li>Enter the learner name.</li>
+            <li>Upload a text-based syllabus PDF or import a JSON profile.</li>
+            <li>Review the subject list and delete irrelevant sections such as B.Arch or B.Planning.</li>
+            <li>Open the collapsible hierarchy and tick topics as complete.</li>
+            <li>Use Progress for easy charts and export PDF/JSON anytime.</li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <section id="parseReview" class="card section hidden">
+      <h2 class="title">Review parsed syllabus</h2><p id="parseSummary" class="muted"></p><div id="parseSubjects" class="grid3" style="margin:18px 0"></div>
+      <div class="actions"><button class="btn primary" id="confirmSaveParse">Continue to tracker</button><button class="btn ghost" id="cancelParse">Hide review</button></div>
+    </section>
+
+    <section id="setupView" class="view"></section>
+
+    <section id="trackerView" class="view hidden card section">
+      <div class="toolbar"><div><h2 class="title">Syllabus hierarchy</h2><p class="muted">Click a subject or chapter to expand. Mark a chapter to update all its topics.</p></div><div class="mini-stat" id="overallMini"></div></div>
+      <div class="toolbar"><input class="input search" id="searchInput" placeholder="Search subject, chapter, topic..." /><select class="input" id="filterSelect" style="max-width:180px"><option value="all">All topics</option><option value="pending">Pending only</option><option value="done">Completed only</option></select><div class="actions"><button class="btn ghost small" id="expandAllBtn">Expand all</button><button class="btn ghost small" id="collapseAllBtn">Collapse all</button></div></div>
+      <div class="tree" id="treeRoot"></div>
+    </section>
+
+    <section id="progressView" class="view hidden card section"><h2 class="title">Progress</h2><p class="muted">Simple charts for the full syllabus and each subject.</p><div id="progressContent" style="margin-top:18px"></div></section>
+
+    <section id="performanceView" class="view hidden card section">
+      <div class="toolbar"><div><h2 class="title">Performance</h2><p class="muted">Add examination marks by subject and view simple score charts.</p></div><button class="btn primary" id="addExamBtn">Add examination</button></div>
+      <div id="performanceContent" style="margin-top:18px"></div>
+    </section>
+
+    <section id="reviewView" class="view hidden card section"><h2 class="title">Review</h2><p class="muted">A plain-language list of completed topics.</p><div id="reviewContent" style="margin-top:18px"></div></section>
+    <section id="settingsView" class="view hidden card section"><h2 class="title">Settings</h2><p class="muted" id="settingsSummary"></p><div class="actions" style="margin-top:18px"><label class="btn ghost" for="jsonFile2">Import JSON</label><input class="hidden" type="file" id="jsonFile2" accept="application/json,.json" /><button class="btn ghost" id="exportSyllabusBtn">Export syllabus JSON</button><button class="btn ghost" id="exportProfileBtn">Export profile JSON</button><button class="btn primary" id="exportPdfBtn">Export progress PDF</button><button class="btn ghost" id="exportPerformanceBtn">Export performance JSON</button></div><div class="danger-zone" style="margin-top:22px"><h3 style="margin-top:0">Reset</h3><p class="muted">Use reset only when you want a clean start.</p><div class="actions"><button class="btn warn" id="resetProgressBtn">Reset progress only</button><button class="btn warn" id="resetPerformanceBtn">Reset performance only</button><button class="btn warn" id="resetAllBtn">Reset everything</button></div></div></section>
+  </main>
+
+  <footer class="footer" role="contentinfo"><div class="footer-container"><div class="footer-links"><span>📧 contact@abhyast.in</span><span>💬 WhatsApp Support</span></div><div>© 2026 Abhyast Private Limited. ABLE™ and TAKECARE™ Registered Frameworks.</div></div></footer>
+
+  <div id="editModal" class="modal-backdrop hidden"><div class="modal"><div class="modal-head"><h2 id="modalTitle" style="margin:0">Edit</h2></div><div class="modal-body"><input type="hidden" id="modalType"><input type="hidden" id="modalId"><label><b>Name</b><input class="input" id="modalName" style="margin-top:8px"></label></div><div class="modal-foot"><button class="btn warn" id="modalDelete">Delete</button><button class="btn ghost" id="modalClose">Cancel</button><button class="btn primary" id="modalSave">Save</button></div></div></div>
+
+
+  <div id="examModal" class="modal-backdrop hidden"><div class="modal gentle-modal"><div class="modal-head gentle"><h2 id="examModalTitle" style="margin:0">Add examination</h2><p class="muted" style="margin:6px 0 0">Enter marks for the subjects you attempted. Leave blank if not applicable.</p></div><div class="modal-body"><input type="hidden" id="examEditId"><div class="grid2"><label><b>Exam name</b><input class="input" id="examName" placeholder="e.g. JEE Mock Test 1" style="margin-top:8px"></label><label><b>Date</b><input class="input" id="examDate" type="date" style="margin-top:8px"></label></div><div id="examSubjectRows" class="exam-subjects"></div></div><div class="modal-foot"><button class="btn ghost" id="examCancel">Cancel</button><button class="btn primary" id="examSave">Save examination</button></div></div></div>
+
+  <div id="pdfTemplate" class="hidden"><div class="pdf-report"><div class="report-head"><div style="display:flex;gap:14px;align-items:center"><img src="logo.png" class="report-logo"><div><h1 style="margin:0;color:#272b6a">My Plan</h1><p style="margin:2px 0;color:#ee4977;font-weight:bold">Progress Report</p></div></div><div style="text-align:right;font-size:12px"><p>Student: <b id="reportName"></b></p><p>Generated: <b id="reportDate"></b></p></div></div><p><b id="reportTitle"></b></p><p id="reportOverall"></p><div id="reportRows"></div><div class="report-footer">© 2026 Abhyast Private Limited. ABLE™ and TAKECARE™ Registered Frameworks.</div></div></div>
+
+  <script>
+/* My Plan parser.js
+   Purpose: turn syllabus PDFs / JSON into one simple internal structure:
+   plan.syllabus.subjects[] -> chapters[] -> topics[]
+   Browser-only, GitHub Pages friendly. No server, no AI dependency.
+*/
+(function(){
+  const Parser = {};
+
+  Parser.extractPdfText = async function(file){
+    if(!window.pdfjsLib) throw new Error('PDF.js was not loaded');
+    const buffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({data: buffer, disableWorker: true, useWorkerFetch: false, isEvalSupported: false}).promise;
+    const pages = [];
+    for(let pageNo=1; pageNo<=pdf.numPages; pageNo++){
+      const page = await pdf.getPage(pageNo);
+      const content = await page.getTextContent();
+      const items = content.items
+        .map(it=>({str:String(it.str||''), x:it.transform?.[4]||0, y:it.transform?.[5]||0}))
+        .filter(it=>it.str.trim());
+      items.sort((a,b)=> Math.abs(b.y-a.y)>4 ? b.y-a.y : a.x-b.x);
+      const lines=[]; let currentY=null; let line=[];
+      for(const it of items){
+        if(currentY===null || Math.abs(it.y-currentY)<=4){ line.push(it.str); currentY = currentY ?? it.y; }
+        else { lines.push(joinLine(line)); line=[it.str]; currentY=it.y; }
+      }
+      if(line.length) lines.push(joinLine(line));
+      pages.push(lines.join('\n'));
+    }
+    return pages.join('\n\n');
+  };
+
+  Parser.parsePdfFile = async function(file){
+    const text = await Parser.extractPdfText(file);
+    return Parser.parseText(text, file.name);
+  };
+
+  Parser.parseText = function(text, fileName='uploaded.pdf'){
+    const raw = normalizeRaw(text);
+    const compact = raw.replace(/\s+/g,' ');
+    if(/JEE\s*\(?Main\)?|B\.E\.\/B\.Tech|B\.Arch|B\.Planning/i.test(compact)) return parseJee(raw, fileName);
+    if(/NEET\s*\(?UG\)?|SYLLABUS FOR NEET/i.test(compact)) return parseEntrance(raw, fileName, 'NEET UG Syllabus Tracker', ['Physics','Chemistry','Biology','Botany','Zoology']);
+    if(/Subject Code\s*[–-]\s*086|COURSE STRUCTURE\s+CLASS\s+IX|Key Concepts\s+Learning Outcomes|No\.\s*of\s*Periods/i.test(compact)) return parseCbseScience(raw, fileName);
+    return parseSchoolOrGeneric(raw, fileName);
+  };
+
+  Parser.normalizeImport = function(obj, fileName='import.json'){
+    if(obj && obj.syllabus && obj.progress){
+      obj.syllabus = normalizeSyllabus(obj.syllabus);
+      obj.progress = obj.progress || {topics:{}, notes:{}};
+      obj.progress.topics = obj.progress.topics || {};
+      return obj;
+    }
+    if(obj && Array.isArray(obj.subjects)) return newPlan(obj, obj.title || 'Imported Syllabus', fileName);
+    if(obj && obj.syllabus && Array.isArray(obj.syllabus.subjects)) return {...obj, syllabus: normalizeSyllabus(obj.syllabus)};
+    // Legacy single object: { Grade, Subjects:[{name, units:[{name, topics[]}]}] }
+    if(obj && obj.Grade && Array.isArray(obj.Subjects)){
+      return newPlan({subjects: legacySubjects([obj])}, `Imported Syllabus ${obj.Grade||''}`.trim(), fileName);
+    }
+    // Legacy array: [{ Grade, Subjects:[...] }]
+    if(Array.isArray(obj) && obj.some(x=>x?.Subjects)){
+      return newPlan({subjects: legacySubjects(obj)}, 'Imported Legacy Syllabus', fileName);
+    }
+    throw new Error('Unsupported JSON format');
+  };
+
+  Parser.newPlan = newPlan;
+  Parser.normalizeSyllabus = normalizeSyllabus;
+  Parser._test = {parseJee, parseEntrance, parseCbseScience, parseSchoolOrGeneric, parseUnits, normalizeRaw};
+
+  function newPlan(syllabus, title, source){
+    return {
+      version:'MY_PLAN_1',
+      createdAt:new Date().toISOString(),
+      learnerName:'',
+      syllabus: normalizeSyllabus({title, source, ...syllabus}),
+      progress:{topics:{}, notes:{}}
+    };
+  }
+
+  function normalizeSyllabus(syllabus){
+    const subjects = (syllabus.subjects||syllabus.Subjects||[]).map(s=>{
+      const chapters = (s.chapters || flattenUnits(s.units) || legacyChapters(s) || []).map(c=>({
+        id:c.id||id(),
+        name:cleanName(c.name||'Untitled Chapter'),
+        topics:(c.topics||[]).map(t=> typeof t==='string' ? {id:id(), name:cleanTopic(t)} : {id:t.id||id(), name:cleanTopic(t.name||'Untitled Topic')}).filter(t=>t.name)
+      })).filter(c=>c.name && c.topics.length);
+      return {id:s.id||id(), name:cleanName(s.name||s.Subject||'Untitled Subject'), chapters};
+    }).filter(s=>s.name && s.chapters.length);
+    return {id:syllabus.id||id(), title:syllabus.title||'Uploaded Syllabus', source:syllabus.source||'', generatedAt:syllabus.generatedAt||new Date().toISOString(), subjects};
+  }
+
+  function legacySubjects(arr){
+    const subjects=[];
+    arr.forEach(g=>(g.Subjects||[]).forEach(s=>{
+      const name = cleanName(s.name || s.Subject || 'Subject');
+      subjects.push({id:id(), name, chapters: legacyChapters(s)});
+    }));
+    return subjects;
+  }
+
+  function flattenUnits(units){
+    if(!Array.isArray(units)) return [];
+    const chapters=[];
+    units.forEach(u=>{
+      if(Array.isArray(u.chapters) && u.chapters.length){
+        u.chapters.forEach(c=>chapters.push({...c, name: c.name || u.name}));
+      } else if(Array.isArray(u.topics)) {
+        chapters.push({name:u.name, topics:u.topics});
+      }
+    });
+    return chapters;
+  }
+
+  function legacyChapters(s){
+    const chapters=[];
+    (s.units||[]).forEach(u=>{
+      if(Array.isArray(u.chapters)) u.chapters.forEach(c=>chapters.push({id:id(), name:c.name||u.name, topics:(c.topics||[]).map(t=>({id:id(), name:String(t)}))}));
+      if(Array.isArray(u.topics)) chapters.push({id:id(), name:u.name, topics:u.topics.map(t=>({id:id(), name:String(t)}))});
+    });
+    (s.chapters||[]).forEach(c=>chapters.push({id:id(), name:c.name, topics:(c.topics||[]).map(t=>({id:id(), name:String(t)}))}));
+    return chapters;
+  }
+
+  function parseJee(raw, fileName){
+    const text = stripBoilerplate(raw);
+    const subjects=[];
+    const paper1End = firstIndex(text, [/Syllabus\s+for\s+JEE\s*\(Main\)\s+Paper\s+2A/i, /Paper\s+2A\s*\(B\.Arch/i, /Syllabus\s+for\s+JEE\s*\(Main\)\s+Paper\s+2B/i], text.length);
+    const paper1 = text.slice(0, paper1End);
+    pushSubject(subjects, 'Mathematics', sectionBetween(paper1, /^\s*MATHEMATICS\b/im, /^\s*PHYSICS\b/im));
+    pushSubject(subjects, 'Physics', sectionBetween(paper1, /^\s*PHYSICS\b/im, /^\s*CHEMISTRY\b/im));
+    pushSubject(subjects, 'Chemistry', sectionBetween(paper1, /^\s*CHEMISTRY\b/im, null));
+
+    const paper2A = sectionBetween(text, /Syllabus\s+for\s+JEE\s*\(Main\)\s+Paper\s+2A|Paper\s+2A\s*\(B\.Arch/i, /Syllabus\s+for\s+JEE\s*\(Main\)\s+Paper\s+2B|Paper\s+2B\s*\(B\.Planning/i);
+    if(paper2A){
+      pushSubject(subjects, 'B.Arch Mathematics', sectionBetween(paper2A, /Part\s*[-–]?\s*I\s+MATHEMATICS|^\s*MATHEMATICS\b/im, /Part\s*[–-]?\s*II\s+APTITUDE|^\s*APTITUDE TEST\b/im));
+      pushSubject(subjects, 'B.Arch Aptitude Test', sectionBetween(paper2A, /^\s*(?:Part\s*[–-]?\s*II\s+)?APTITUDE TEST\b/im, /^\s*(?:Part\s*[–-]?\s*III\s+)?DRAWING TEST\b/im));
+      pushSubject(subjects, 'B.Arch Drawing Test', sectionBetween(paper2A, /^\s*(?:Part\s*[–-]?\s*III\s+)?DRAWING TEST\b/im, null));
+    }
+    const paper2B = sectionBetween(text, /Syllabus\s+for\s+JEE\s*\(Main\)\s+Paper\s+2B|Paper\s+2B\s*\(B\.Planning/i, null);
+    if(paper2B){
+      pushSubject(subjects, 'B.Planning Mathematics', sectionBetween(paper2B, /Part\s*[-–]?\s*I\s+MATHEMATICS|^\s*MATHEMATICS\b/im, /Part\s*[–-]?\s*II\s+APTITUDE|^\s*APTITUDE TEST\b/im));
+      pushSubject(subjects, 'B.Planning Aptitude Test', sectionBetween(paper2B, /^\s*(?:Part\s*[–-]?\s*II\s+)?APTITUDE TEST\b/im, /^\s*(?:Part\s*[–-]?\s*III\s+)?PLANNING\b/im));
+      pushSubject(subjects, 'B.Planning', sectionBetween(paper2B, /^\s*(?:Part\s*[–-]?\s*III\s+)?PLANNING\b/im, null));
+    }
+    return newPlan({subjects:dedupeSubjects(subjects)}, 'JEE Main Syllabus Tracker', fileName);
+  }
+
+  function parseEntrance(raw, fileName, title, orderedSubjects){
+    const text = stripBoilerplate(raw);
+    const subjectNames = orderedSubjects || ['Physics','Chemistry','Biology','Botany','Zoology'];
+    const subjects=[];
+    subjectNames.forEach((name,idx)=>{
+      const later = subjectNames.slice(idx+1).map(escapeRe).join('|');
+      const section = sectionBetween(text, new RegExp('^\\s*'+escapeRe(name)+'\\b','im'), later ? new RegExp('^\\s*(?:'+later+')\\b','im') : null);
+      if(section && section.length>80) pushSubject(subjects, name, section);
+    });
+    if(!subjects.length){
+      const after = sectionBetween(text, /SYLLABUS\s+FOR\s+NEET/i, null) || text;
+      pushSubject(subjects, 'Syllabus', after);
+    }
+    return newPlan({subjects:dedupeSubjects(subjects)}, title, fileName);
+  }
+
+  function parseCbseScience(raw, fileName){
+    const text = stripBoilerplate(raw);
+    const syllabusStart = firstIndex(text, [/COURSE STRUCTURE/i, /^\s*Cell\s+No\.\s*of\s*Periods/im], 0);
+    const working = syllabusStart ? text.slice(syllabusStart) : text;
+    const lines = working.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+    const headingIndexes=[];
+    lines.forEach((line,i)=>{
+      if(isCbseChapterHeading(line)) headingIndexes.push(i);
+    });
+    const chapters=[];
+    for(let h=0; h<headingIndexes.length; h++){
+      const start = headingIndexes[h];
+      const end = h+1<headingIndexes.length ? headingIndexes[h+1] : lines.length;
+      const headingLine = lines[start];
+      const name = cleanName(headingLine.replace(/No\.\s*of\s*Periods\s*:\s*\d+.*/i,'').trim());
+      const blockLines = lines.slice(start+1,end);
+      const topics = extractCbseTopics(blockLines);
+      if(name && topics.length) chapters.push({id:id(), name, topics: topics.map(t=>({id:id(), name:t}))});
+    }
+    if(!chapters.length){
+      // Fallback: parse by headings and bullets.
+      parseUnits(working).forEach(c=>chapters.push(c));
+    }
+    return newPlan({subjects:[{id:id(), name:'Science', chapters}]}, 'CBSE Science Syllabus Tracker', fileName);
+  }
+
+  function isCbseChapterHeading(line){
+    if(/No\.\s*of\s*Periods\s*:\s*\d+/i.test(line)) return true;
+    // Some PDF text breaks the heading and periods onto adjacent lines; keep known/simple chapter-looking lines.
+    return /^(Cell|Tissues|Reproduction|Diversity|Exploring Mixtures|Structure of an Atom|Atoms and Molecules|Earth as a System|Motion|Force|Work|Sound)(?:\s+No\.|$)/.test(line) && line.length<90;
+  }
+
+  function extractCbseTopics(lines){
+    const topics=[];
+    let capture = false;
+    for(const rawLine of lines){
+      let line = rawLine.replace(/Key Concepts|Learning Outcomes/ig,'').trim();
+      if(!line) continue;
+      if(/^C[-–]?\s*\d+(?:\.\d+)?/i.test(line)) { capture=false; continue; }
+      if(/[•●]/.test(line)) capture=true;
+      if(capture || /^[A-Z][A-Za-z ,;()&\/-]{8,}$/.test(line)){
+        line.split(/[•●]/).map(x=>x.trim()).filter(Boolean).forEach(piece=>{
+          const cleaned = cleanTopic(piece.replace(/^[-–]+/,'').trim());
+          if(isUsefulTopic(cleaned)) topics.push(cleaned);
+        });
+      }
+    }
+    return dedupeStrings(topics).slice(0,120);
+  }
+
+  function parseSchoolOrGeneric(raw, fileName){
+    const text = stripBoilerplate(raw);
+    const subjects = parseFlatSchoolTable(text);
+    if(subjects.length) return newPlan({subjects}, inferSchoolTitle(text), fileName);
+    return newPlan({subjects:[{id:id(), name:'Uploaded Syllabus', chapters:parseUnits(text)}]}, 'Uploaded Syllabus Tracker', fileName);
+  }
+
+  function parseFlatSchoolTable(text){
+    const subjectList = ['English','Hindi','Maths','Mathematics','Science','Social Science','French','German','Japanese','Sanskrit','Computer','Physics','Chemistry','Biology'];
+    const lines = text.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+    const starts=[];
+    lines.forEach((line,i)=>{
+      const hit = subjectList.find(s=>new RegExp('^'+escapeRe(s)+'(?:\\s+|$)','i').test(line));
+      if(hit) starts.push({i, name:hit});
+    });
+    const subjects=[];
+    starts.forEach((st,idx)=>{
+      const end = idx+1<starts.length ? starts[idx+1].i : lines.length;
+      let block = lines.slice(st.i,end);
+      // If first line is "Maths Chapter 2 : Power Play", keep the remaining content after subject as first content line.
+      const first = block[0].replace(new RegExp('^'+escapeRe(st.name)+'\\s*','i'),'').trim();
+      block = (first ? [first, ...block.slice(1)] : block.slice(1)).filter(Boolean);
+      const chapters = parseSchoolBlock(block, st.name);
+      if(chapters.length) subjects.push({id:id(), name:st.name==='Maths'?'Mathematics':st.name, chapters});
+    });
+    return dedupeSubjects(subjects);
+  }
+
+  function parseSchoolBlock(lines, subject){
+    const chapters=[]; let current=null;
+    const startNew = line => /^(READING|WRITING|GRAMMAR|LITERATURE|व्याकरण|रचनात्मक लेखन|Chapter\s*\d+\s*:|CHAPTER[-\s]*\d+|Lecon[-\s]*\d+|Lektion\s*\d+|DAI\s*\d+\s*KA|पाठ\s*\d+)/i.test(line) || /^[A-Z ]{5,}$/.test(line);
+    lines.forEach(line=>{
+      line = cleanTopic(line);
+      if(!line || /^Subject$/i.test(line)) return;
+      if(startNew(line) || !current){
+        let name=line;
+        const m=line.match(/^(Chapter\s*\d+\s*:?|CHAPTER[-\s]*\d+\s*)\s*(.+)$/i);
+        if(m) name = (m[1]+' '+m[2]).trim();
+        current={id:id(), name:cleanName(name), topics:[]};
+        chapters.push(current);
+        if(!/^(READING|WRITING|GRAMMAR|LITERATURE|व्याकरण|रचनात्मक लेखन)$/i.test(line)) current.topics.push({id:id(), name:line});
+      } else {
+        current.topics.push({id:id(), name:line});
+      }
+    });
+    return chapters.filter(c=>c.name && (c.topics.length || c.name.length));
+  }
+
+  function pushSubject(subjects, name, section){
+    if(!section || section.replace(/\s+/g,' ').trim().length < 30) return;
+    let chapters = parseUnits(section);
+    if(!chapters.length){
+      const body = section.replace(new RegExp('^\\s*'+escapeRe(name)+'\\b','i'),'');
+      chapters = [{id:id(), name:'Syllabus', topics: splitTopics(body).map(t=>({id:id(), name:t}))}].filter(c=>c.topics.length);
+    }
+    if(chapters.length) subjects.push({id:id(), name:cleanName(name), chapters});
+  }
+
+  function parseUnits(section){
+    let s = stripBoilerplate(section);
+    s = s.replace(/\bUNITS\s*(\d+)\s*:/gi,'UNIT $1:');
+    s = s.replace(/\bUNIT\s*([0-9]+)\s*[:\-.]?\s*/gi, '\n@@UNIT@@ ');
+    s = s.replace(/\bUNIT\s*([IVXLCDM]+)\s*[:\-.]\s*/gi, '\n@@UNIT@@ ');
+    if(s.includes('@@UNIT@@')) s = s.slice(s.indexOf('@@UNIT@@'));
+    const parts = s.split(/@@UNIT@@/).map(x=>x.trim()).filter(x=>x.length>25);
+    const chapters=[];
+    if(parts.length>=2 || /^@@UNIT@@/.test(s)){
+      parts.forEach((chunk,i)=>{
+        const chapter = chunkToChapter(chunk, `Unit ${i+1}`);
+        if(chapter.topics.length) chapters.push(chapter);
+      });
+    } else {
+      // CBSE/table-like fallback: split on chapter headings and long all-caps headings.
+      const lines = s.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+      let buffers=[]; let current=[];
+      lines.forEach(line=>{
+        const heading = isCbseChapterHeading(line) || (/^[A-Z][A-Za-z0-9 ,()&\/-]{3,90}$/.test(line) && !/^C[-–]?\s*\d/.test(line) && !/^(Key Concepts|Learning Outcomes|COURSE STRUCTURE|Total|Grand Total)/i.test(line));
+        if(heading && current.length){ buffers.push(current.join('\n')); current=[line]; }
+        else current.push(line);
+      });
+      if(current.length) buffers.push(current.join('\n'));
+      if(buffers.length<2) buffers=[s];
+      buffers.forEach((chunk,i)=>{
+        const chapter = chunkToChapter(chunk, `Section ${i+1}`);
+        if(chapter.topics.length) chapters.push(chapter);
+      });
+    }
+    return chapters;
+  }
+
+  function chunkToChapter(chunk, fallback){
+    chunk = chunk.replace(/^(PHYSICAL CHEMISTRY|INORGANIC CHEMISTRY|ORGANIC CHEMISTRY)\s+/i,'').trim();
+    const lines = chunk.split(/\n+/).map(l=>l.trim()).filter(Boolean);
+    let title=''; let body='';
+    if(lines.length && lines[0].length <= 140){
+      title = lines[0];
+      body = lines.slice(1).join(' ');
+    } else {
+      const oneLine = chunk.replace(/\n/g,' ').replace(/\s+/g,' ').trim();
+      const titleMatch = oneLine.match(/^([A-Z][A-Z0-9 ,()\/&.'’\-–]{5,120})(?=\s+[A-Z][a-z]|\s+[a-z]|$)/);
+      if(titleMatch){ title=titleMatch[1]; body=oneLine.slice(title.length); }
+      else {
+        const m = oneLine.match(/^(.{12,90}?)(?:[:.;]|\s{2,})\s+(.+)$/);
+        title = m ? m[1] : oneLine.split(/\s+/).slice(0,8).join(' ');
+        body = m ? m[2] : oneLine.slice(title.length);
+      }
+    }
+    title = cleanName(title.replace(/^(UNIT|Unit)\s*[-–]?\s*(\d+|[IVX]+)\s*[:.]?/i,'')) || fallback;
+    body = body.trim() || chunk.replace(title,'');
+    const topics = splitTopics(body).map(t=>({id:id(), name:t}));
+    // If the body itself did not split well, preserve it as a single topic rather than losing content.
+    if(!topics.length && body.trim()) topics.push({id:id(), name:cleanTopic(body.trim())});
+    return {id:id(), name:title, topics};
+  }
+
+  function splitTopics(body){
+    let cleaned = cleanTopic(body)
+      .replace(/[●]/g,'•')
+      .replace(/\s+/g,' ')
+      .trim();
+    if(!cleaned) return [];
+    // Remove common administrative noise without deleting syllabus content.
+    cleaned = cleaned.replace(/File No\..*?(?=(UNIT|PHYSICS|CHEMISTRY|BIOLOGY|$))/gi,' ')
+                     .replace(/Generated from eOffice.*?(?=(UNIT|PHYSICS|CHEMISTRY|BIOLOGY|$))/gi,' ');
+    let pieces = cleaned.split(/(?:•|\u2022|;|\.\s+(?=[A-Z0-9])|\b\d+\.\s+|,\s+(?=[A-Z][a-z]{2,}))/).map(x=>x.trim());
+    if(pieces.length < 3) pieces = cleaned.split(/;|,|\band\b/i).map(x=>x.trim());
+    const out=[];
+    pieces.forEach(p=>{
+      p = cleanTopic(p.replace(/^[-–:,.;\s]+|[-–:,.;\s]+$/g,''));
+      if(isUsefulTopic(p)) out.push(p);
+    });
+    return dedupeStrings(out);
+  }
+
+  function stripBoilerplate(text){
+    return normalizeRaw(text)
+      .replace(/Syllabus\s+for\s+JEE\s*\(Main\)\s*-\s*2026/gi,'')
+      .replace(/\bPage\s+\d+\b/gi,'')
+      .replace(/^\s*\d+\s*$/gm,'')
+      .replace(/^\s*4565948\/2025\/UGMEB.*$/gm,'')
+      .replace(/^\s*File No\..*$/gm,'')
+      .replace(/^\s*Generated from eOffice.*$/gm,'')
+      .replace(/^\s*DFA\/.*$/gm,'')
+      .replace(/\n{3,}/g,'\n\n');
+  }
+
+  function sectionBetween(text, startRe, endRe){
+    const start = text.search(startRe); if(start<0) return '';
+    const after = text.slice(start);
+    if(!endRe) return after;
+    const end = after.slice(1).search(endRe);
+    return end>=0 ? after.slice(0,end+1) : after;
+  }
+
+  function firstIndex(text, regexes, fallback){
+    let found = fallback;
+    regexes.forEach(re=>{ const idx=text.search(re); if(idx>=0 && idx<found) found=idx; });
+    return found;
+  }
+
+  function inferSchoolTitle(text){
+    const cls = text.match(/Class\s*[-–]?\s*([A-ZIVX0-9]+)/i)?.[0] || '';
+    const pt = text.match(/PT[-\s]*\d+\s*Syllabus\s*\d{2}[-–]\d{2}/i)?.[0] || 'School Syllabus Tracker';
+    return `${cls} ${pt}`.trim();
+  }
+
+  function cleanTextLine(s){ return String(s||'').replace(/\u00a0/g,' ').replace(/\uFFFD/g,' ').replace(/[ \t]+/g,' ').trim(); }
+  function normalizeRaw(text){ return String(text||'').replace(/\r/g,'\n').split('\n').map(cleanTextLine).join('\n').replace(/\n{3,}/g,'\n\n').trim(); }
+  function joinLine(parts){ return parts.map(cleanTextLine).filter(Boolean).join(' ').replace(/\s+/g,' ').trim(); }
+  function cleanName(s){ return cleanTopic(s).replace(/[:.]+$/,'').replace(/\s{2,}/g,' ').slice(0,140).trim(); }
+  function cleanTopic(s){ return String(s||'').replace(/\u00a0/g,' ').replace(/\uFFFD/g,' ').replace(/[ \t]+/g,' ').replace(/\s+([,.;:])/g,'$1').trim(); }
+  function isUsefulTopic(s){
+    if(!s || s.length<3 || s.length>240) return false;
+    if(/^(and|or|the|their|its|of|in|to|for|with|Key Concepts|Learning Outcomes)$/i.test(s)) return false;
+    if(/^\d+$/.test(s)) return false;
+    if(/^NMC|^National Testing Agency|^PUBLIC NOTICE/i.test(s)) return false;
+    return true;
+  }
+  function dedupeStrings(arr){ const seen=new Set(); return arr.filter(x=>{const k=x.toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true;}); }
+  function dedupeSubjects(subjects){ const seen=new Set(); return subjects.filter(s=>{ const k=s.name.toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; }); }
+  function escapeRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function id(){ return (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'id_'+Math.random().toString(36).slice(2)+Date.now().toString(36); }
+
+  window.MyPlanParser = Parser;
+})();
+
+</script>
+<script>
+(function(){
+const STORE='MY_PLAN_FINAL_V1';
+let plan=null, activeTab='setup', charts={}, openNodes=new Set();
+const $=id=>document.getElementById(id);
+const safe=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const pct=(a,b)=>b?Math.round((a/b)*100):0;
+
+document.addEventListener('DOMContentLoaded', init);
+function init(){
+  if(window.pdfjsLib){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
+  plan = loadPlan();
+  bind();
+  renderAll();
+}
+function bind(){
+  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>showTab(btn.dataset.tab)));
+  $('studentName').addEventListener('input', e=>{ if(!plan) plan=emptyPlan(); plan.learnerName=e.target.value.trim(); save(); renderHeader(); });
+  $('readPdfBtn').addEventListener('click', readPdf);
+  $('pdfFile').addEventListener('change',()=>{ const f=$('pdfFile').files[0]; setStatus(f ? `PDF selected: ${f.name}. Click Read PDF to continue.` : 'Choose a PDF first.'); });
+  $('jsonFile').addEventListener('change', importJsonFile);
+  $('jsonFile2').addEventListener('change', importJsonFile);
+  $('exportSyllabusBtn').addEventListener('click', exportSyllabus);
+  $('exportProfileBtn').addEventListener('click', exportProfile);
+  $('exportPdfBtn').addEventListener('click', exportPdfReport);
+  $('exportPerformanceBtn')?.addEventListener('click', exportPerformance);
+  $('addExamBtn')?.addEventListener('click', ()=>openExamModal());
+  $('resetProgressBtn').addEventListener('click', resetProgress);
+  $('resetPerformanceBtn')?.addEventListener('click', resetPerformance);
+  $('resetAllBtn').addEventListener('click', resetAll);
+  $('searchInput').addEventListener('input', renderTracker);
+  $('filterSelect').addEventListener('change', renderTracker);
+  $('expandAllBtn').addEventListener('click',()=>{document.querySelectorAll('.node').forEach(n=>{n.classList.add('open'); if(n.dataset.nodeId) openNodes.add(n.dataset.nodeId);});});
+  $('collapseAllBtn').addEventListener('click',()=>{document.querySelectorAll('.node').forEach(n=>{n.classList.remove('open'); if(n.dataset.nodeId) openNodes.delete(n.dataset.nodeId);});});
+  $('confirmSaveParse').addEventListener('click',()=>{ save(); showTab('tracker'); setStatus('Syllabus loaded. Open a topic and choose how prepared you are.'); });
+  $('cancelParse').addEventListener('click',()=>{ $('parseReview').classList.add('hidden'); });
+  $('modalClose').addEventListener('click', closeModal);
+  $('modalSave').addEventListener('click', saveModal);
+  $('modalDelete').addEventListener('click', deleteModalTarget);
+  $('examCancel')?.addEventListener('click', closeExamModal);
+  $('examSave')?.addEventListener('click', saveExamModal);
+  buildStatusModal();
+}
+function emptyPlan(){ return {version:'MY_PLAN_1', createdAt:new Date().toISOString(), learnerName:'', syllabus:{title:'',source:'',subjects:[]}, progress:{topics:{}, notes:{}}, performance:{exams:[]}}; }
+function loadPlan(){ try{const p=JSON.parse(localStorage.getItem(STORE)) || emptyPlan(); if(!p.progress) p.progress={topics:{},notes:{}}; if(!p.performance) p.performance={exams:[]}; if(!p.performance.exams) p.performance.exams=[]; return p;}catch(e){return emptyPlan()} }
+function save(){ localStorage.setItem(STORE, JSON.stringify(plan)); }
+function setStatus(msg){ $('status').textContent=msg; }
+async function readPdf(){
+  const file=$('pdfFile').files[0];
+  if(!file){ setStatus('Choose a PDF first.'); return; }
+  try{
+    setStatus('Reading PDF. Please wait...');
+    $('readPdfBtn').disabled=true;
+    const parsed = await MyPlanParser.parsePdfFile(file);
+    parsed.learnerName = $('studentName').value.trim() || plan?.learnerName || '';
+    plan = parsed;
+    if(!plan.performance) plan.performance={exams:[]};
+    $('studentName').value = plan.learnerName || '';
+    save();
+    renderParseReview();
+    renderAll();
+    showTab('tracker');
+    setStatus(`Loaded ${countAll().topics} topics from ${file.name}.`);
+  }catch(err){
+    console.error(err);
+    setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'unknown error') + '. Try Import JSON, or check that this is a text-based PDF.');
+  }finally{ $('readPdfBtn').disabled=false; }
+}
+function importJsonFile(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const imported=JSON.parse(ev.target.result);
+      plan=MyPlanParser.normalizeImport(imported,file.name);
+      if(!plan.performance) plan.performance={exams: imported.performance?.exams || imported.exams || []};
+      plan.learnerName = $('studentName').value.trim() || plan.learnerName || '';
+      $('studentName').value = plan.learnerName || '';
+      save(); renderAll(); showTab('tracker'); setStatus(`Imported JSON: ${file.name}`);
+    }catch(err){ console.error(err); setStatus('This JSON format is not supported.'); alert('This JSON format is not supported.'); }
+  };
+  reader.readAsText(file);
+}
+function renderAll(){ renderHeader(); renderSetupState(); renderTracker(); renderProgress(); renderPerformance(); renderReview(); renderSettings(); }
+function renderHeader(){ $('studentName').value=plan?.learnerName||''; }
+function renderSetupState(){
+  const has=hasSyllabus();
+  $('emptyMessage').classList.toggle('hidden',has);
+  $('loadedMessage').classList.toggle('hidden',!has);
+  if(has){ const c=countAll(); $('loadedMessage').innerHTML=`<b>${safe(plan.syllabus.title||'Loaded syllabus')}</b><br>${c.subjects} subjects • ${c.chapters} chapters • ${c.topics} topics`; }
+}
+function showTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+  const target = tab==='setup' ? $('setupCard') : $(tab+'View');
+  if(tab!=='setup' && target) target.classList.remove('hidden');
+  if(tab==='progress') renderProgress();
+  if(tab==='review') renderReview();
+  if(tab==='performance') renderPerformance();
+  if(tab==='tracker') renderTracker();
+  requestAnimationFrame(()=> (target || document.querySelector('main')).scrollIntoView({behavior:'smooth', block:'start'}));
+}
+function hasSyllabus(){ return !!(plan?.syllabus?.subjects?.length); }
+function countAll(subject){
+  const subjects=subject?[subject]:(plan?.syllabus?.subjects||[]); let chapters=0, topics=0, done=0;
+  subjects.forEach(s=>(s.chapters||[]).forEach(c=>{chapters++; (c.topics||[]).forEach(t=>{topics++; if(isDone(t.id)) done++;});}));
+  return {subjects:subjects.length, chapters, topics, done, pending:topics-done, percent:pct(done,topics)};
+}
+function topicRecord(id){ return plan?.progress?.topics?.[id] || {}; }
+function isDone(id){ const r=topicRecord(id); return !!r.done || r.state==='Well Prepared' || r.state==='Prepared'; }
+function hasStatus(id){ const r=topicRecord(id); return !!(r.state || r.done); }
+function setDone(id,done){ if(!plan.progress) plan.progress={topics:{},notes:{}}; if(!plan.progress.topics) plan.progress.topics={}; plan.progress.topics[id]={...(plan.progress.topics[id]||{}), done, state: done ? 'Well Prepared' : '', updatedAt:new Date().toISOString()}; }
+function setTopicState(id,state,note=''){ if(!plan.progress) plan.progress={topics:{},notes:{}}; if(!plan.progress.topics) plan.progress.topics={}; plan.progress.topics[id]={...(plan.progress.topics[id]||{}), state, note, done:(state==='Well Prepared'||state==='Prepared'), updatedAt:new Date().toISOString()}; }
+function stateClass(state){ return ({'Well Prepared':'state-well','Prepared':'state-prepared','Preparing':'state-preparing','Not Prepared':'state-not'}[state] || 'state-empty'); }
+function renderParseReview(){
+  const box=$('parseReview'); box.classList.remove('hidden');
+  const c=countAll();
+  $('parseSummary').innerHTML=`Parsed <b>${c.subjects}</b> subjects, <b>${c.chapters}</b> chapters, and <b>${c.topics}</b> topics. Review/delete irrelevant subjects before continuing.`;
+  $('parseSubjects').innerHTML=(plan.syllabus.subjects||[]).map(s=>`<div class="mini-stat"><b>${safe(s.name)}</b><span class="muted">${countAll(s).chapters} chapters • ${countAll(s).topics} topics</span></div>`).join('');
+}
+function renderTracker(){
+  const root=$('treeRoot');
+  if(!hasSyllabus()){ root.innerHTML='<div class="empty">Upload a PDF or import JSON to see the hierarchy.</div>'; return; }
+  const q=($('searchInput').value||'').toLowerCase().trim(), filter=$('filterSelect').value;
+  root.innerHTML='';
+  plan.syllabus.subjects.forEach(subject=>{
+    const subjectEl=subjectNode(subject,q,filter);
+    if(subjectEl) root.appendChild(subjectEl);
+  });
+  if(!root.children.length) root.innerHTML='<div class="empty">No matching item found.</div>';
+  renderSetupState(); renderProgressBarsMini();
+}
+function subjectNode(subject,q,filter){
+  const children=[]; (subject.chapters||[]).forEach(ch=>{const n=chapterNode(subject,ch,q,filter); if(n) children.push(n);});
+  const hay=(subject.name+' '+JSON.stringify(subject)).toLowerCase(); if(q && !hay.includes(q) && !children.length) return null;
+  const c=countAll(subject);
+  const node=makeNode('subject', subject.name, `${c.done}/${c.topics} ready`, children, `<button class="btn small ghost" data-edit-subject="${subject.id}">Edit</button><button class="btn small warn" data-delete-subject="${subject.id}">Delete</button>`, subject.id);
+  node.querySelector('[data-edit-subject]')?.addEventListener('click',e=>{e.stopPropagation(); openModal('subject', subject.id);});
+  node.querySelector('[data-delete-subject]')?.addEventListener('click',e=>{e.stopPropagation(); deleteSubject(subject.id);});
+  return node;
+}
+function chapterNode(subject,ch,q,filter){
+  const topicEls=[]; (ch.topics||[]).forEach(t=>{ const d=isDone(t.id); const hay=(subject.name+' '+ch.name+' '+t.name).toLowerCase(); if(q && !hay.includes(q)) return; if(filter==='done'&&!d) return; if(filter==='pending'&&d) return; topicEls.push(topicRow(t)); });
+  const hasMatch=(subject.name+' '+ch.name+' '+(ch.topics||[]).map(t=>t.name).join(' ')).toLowerCase().includes(q);
+  if((q && !hasMatch && !topicEls.length) || (!topicEls.length && filter!=='all')) return null;
+  const done=(ch.topics||[]).filter(t=>isDone(t.id)).length, total=(ch.topics||[]).length;
+  const actions=`<button class="btn small soft" data-state-ch="${ch.id}">Set chapter status</button><button class="btn small ghost" data-reset-ch="${ch.id}">Reset</button><button class="btn small ghost" data-edit-ch="${ch.id}">Edit</button>`;
+  const node=makeNode('chapter', ch.name, `${done}/${total} ready`, topicEls, actions, ch.id);
+  node.querySelector('[data-state-ch]').addEventListener('click',e=>{e.stopPropagation(); openStatusModal('chapter', ch.id);});
+  node.querySelector('[data-reset-ch]').addEventListener('click',e=>{e.stopPropagation(); resetChapter(ch.id);});
+  node.querySelector('[data-edit-ch]').addEventListener('click',e=>{e.stopPropagation(); openModal('chapter', ch.id);});
+  return node;
+}
+function makeNode(type,title,meta,children,actions='',id=''){
+  const div=document.createElement('div'); div.className=`node ${type==='chapter'?'chapter':''}`;
+  if(id) div.dataset.nodeId=id;
+  if(id && openNodes.has(id)) div.classList.add('open');
+  div.innerHTML=`<div class="node-head"><span class="chev">▶</span><span class="node-title">${safe(title)}</span><span class="node-meta">${safe(meta)}</span><span class="actions">${actions}</span></div><div class="node-children"></div>`;
+  div.querySelector('.node-head').addEventListener('click',()=>{div.classList.toggle('open'); if(id){ if(div.classList.contains('open')) openNodes.add(id); else openNodes.delete(id); }});
+  const box=div.querySelector('.node-children'); children.forEach(c=>box.appendChild(c)); return div;
+}
+function topicRow(t){
+  const r=topicRecord(t.id), label=r.state || (r.done?'Well Prepared':'Not marked');
+  const row=document.createElement('div'); row.className='topic-row';
+  row.innerHTML=`<button class="status-dot ${stateClass(r.state)}" title="${safe(label)}"></button><span class="topic-name">${safe(t.name)}</span><span class="state-label">${safe(label)}</span><span class="topic-actions"><button class="btn small ghost" data-edit-topic>Edit</button></span>`;
+  row.addEventListener('click',()=>openStatusModal('topic',t.id));
+  row.querySelector('[data-edit-topic]').addEventListener('click',e=>{e.stopPropagation(); openModal('topic',t.id);});
+  return row;
+}
+function markChapter(chapterId,state){ const ch=findChapter(chapterId); if(!ch)return; (ch.topics||[]).forEach(t=>setTopicState(t.id,state)); save(); renderAll(); }
+function resetChapter(chapterId){ const ch=findChapter(chapterId); if(!ch)return; (ch.topics||[]).forEach(t=>delete plan.progress.topics[t.id]); save(); renderAll(); }
+function deleteSubject(subjectId){ const s=findSubject(subjectId); if(!s)return; if(!confirm(`Delete ${s.name}? This removes the subject and its progress.`))return; const ids=new Set(); (s.chapters||[]).forEach(c=>(c.topics||[]).forEach(t=>ids.add(t.id))); plan.syllabus.subjects=plan.syllabus.subjects.filter(x=>x.id!==subjectId); ids.forEach(id=>delete plan.progress.topics[id]); save(); renderAll(); setStatus('Subject deleted.'); }
+function renderProgressBarsMini(){ const c=countAll(); $('overallMini').innerHTML=`<b>${c.percent}%</b><span class="muted">Ready / prepared</span><div class="progressbar"><span style="width:${c.percent}%"></span></div>`; }
+function renderProgress(){
+  const box=$('progressContent'); if(!hasSyllabus()){box.innerHTML='<div class="empty">Upload a syllabus to see progress charts.</div>'; return;}
+  const c=countAll();
+  box.innerHTML=`<div class="grid3"><div class="mini-stat"><b>${c.percent}%</b><span class="muted">Overall readiness</span><div class="progressbar"><span style="width:${c.percent}%"></span></div></div><div class="mini-stat"><b>${c.done}</b><span class="muted">Ready topics</span></div><div class="mini-stat"><b>${c.pending}</b><span class="muted">Not ready yet</span></div></div><div class="chart-grid" style="margin-top:18px"><div class="chart-card"><canvas id="subjectChart"></canvas></div><div class="chart-card"><canvas id="overallChart"></canvas></div></div><div id="subjectBars" style="margin-top:18px"></div>`;
+  const rows=plan.syllabus.subjects.map(s=>({name:s.name, ...countAll(s)}));
+  $('subjectBars').innerHTML=rows.map(r=>`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-weight:900"><span>${safe(r.name)}</span><span>${r.percent}%</span></div><div class="progressbar"><span style="width:${r.percent}%"></span></div></div>`).join('');
+  drawCharts(rows,c);
+}
+function drawCharts(rows,c){
+  Object.values(charts).forEach(ch=>ch.destroy?.()); charts={};
+  if(!window.Chart) return;
+  charts.subject=new Chart($('subjectChart'),{type:'bar',data:{labels:rows.map(r=>r.name),datasets:[{label:'Readiness %',data:rows.map(r=>r.percent),backgroundColor:'#4bc2c4',borderColor:'#272b6a',borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Subject readiness'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+  charts.overall=new Chart($('overallChart'),{type:'doughnut',data:{labels:['Ready / prepared','Not ready yet'],datasets:[{data:[c.done,c.pending],backgroundColor:['#4bc2c4','#e2e8f0'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Overall syllabus'},legend:{position:'bottom'}}}});
+}
+
+function subjectNames(){ return (plan?.syllabus?.subjects||[]).map(s=>s.name); }
+function exams(){ if(!plan.performance) plan.performance={exams:[]}; if(!plan.performance.exams) plan.performance.exams=[]; return plan.performance.exams; }
+function examPercent(score){ const o=Number(score?.obtained), t=Number(score?.total); return t>0 && isFinite(o) ? Math.round((o/t)*100) : null; }
+function examOverallPercent(exam){ let got=0,total=0; Object.values(exam.scores||{}).forEach(sc=>{ const o=Number(sc.obtained), t=Number(sc.total); if(isFinite(o)&&isFinite(t)&&t>0){got+=o; total+=t;} }); return total?Math.round((got/total)*100):null; }
+function renderPerformance(){
+  const box=$('performanceContent'); if(!box) return;
+  if(!hasSyllabus()){ box.innerHTML='<div class="empty">Upload a syllabus first. Subjects for marks will appear automatically.</div>'; return; }
+  const list=exams();
+  const subjects=subjectNames();
+  if(!list.length){ box.innerHTML=`<div class="empty">No examinations added yet.<br><br><button class="btn primary" onclick="MyPlanApp.openExamModal()">Add examination</button></div>`; return; }
+  const latest=list[list.length-1];
+  const latestRows=subjects.map(sub=>({subject:sub, percent:examPercent(latest.scores?.[sub])})).filter(x=>x.percent!==null);
+  const overallRows=list.map(ex=>({exam:ex.name, percent:examOverallPercent(ex)})).filter(x=>x.percent!==null);
+  box.innerHTML=`<div class="grid3"><div class="mini-stat"><b>${list.length}</b><span class="muted">Examinations</span></div><div class="mini-stat"><b>${examOverallPercent(latest)??'-'}%</b><span class="muted">Latest overall</span></div><div class="mini-stat"><b>${safe(latest.name)}</b><span class="muted">Latest exam</span></div></div><div class="performance-controls"><label><b>View subject trend</b><select class="input" id="performanceSubjectSelect"><option value="__all__">Overall trend</option>${subjects.map(s=>`<option value="${safe(s)}">${safe(s)}</option>`).join('')}</select></label></div><div class="chart-grid" style="margin-top:18px"><div class="chart-card"><canvas id="examTrendChart"></canvas></div><div class="chart-card"><canvas id="examLatestChart"></canvas></div></div><div class="exam-list">${list.slice().reverse().map(examCard).join('')}</div>`;
+  $('performanceSubjectSelect')?.addEventListener('change', drawPerformanceCharts);
+  box.querySelectorAll('[data-edit-exam]').forEach(b=>b.addEventListener('click',()=>openExamModal(b.dataset.editExam)));
+  box.querySelectorAll('[data-delete-exam]').forEach(b=>b.addEventListener('click',()=>deleteExam(b.dataset.deleteExam)));
+  drawPerformanceCharts();
+}
+function examCard(ex){ const overall=examOverallPercent(ex); const rows=Object.entries(ex.scores||{}).filter(([_,v])=>examPercent(v)!==null).map(([s,v])=>`<span class="pill">${safe(s)}: ${safe(v.obtained)}/${safe(v.total)} (${examPercent(v)}%)</span>`).join(' '); return `<div class="review-card"><div class="toolbar" style="margin:0"><div><b>${safe(ex.name)}</b><div class="muted">${safe(ex.date||'No date')} • Overall ${overall??'-'}%</div></div><div class="actions"><button class="btn small ghost" data-edit-exam="${safe(ex.id)}">Edit</button><button class="btn small warn" data-delete-exam="${safe(ex.id)}">Delete</button></div></div><div style="margin-top:10px">${rows||'<span class="muted">No marks entered.</span>'}</div></div>`; }
+function drawPerformanceCharts(){
+  if(!window.Chart || !$('examTrendChart') || !$('examLatestChart')) return;
+  charts.examTrend?.destroy?.(); charts.examLatest?.destroy?.();
+  const list=exams(); const selected=$('performanceSubjectSelect')?.value || '__all__';
+  const trend=list.map(ex=>({label:ex.name, percent:selected==='__all__'?examOverallPercent(ex):examPercent(ex.scores?.[selected])})).filter(x=>x.percent!==null);
+  charts.examTrend=new Chart($('examTrendChart'),{type:'line',data:{labels:trend.map(x=>x.label),datasets:[{label:selected==='__all__'?'Overall %':selected+' %',data:trend.map(x=>x.percent),borderColor:'#4bc2c4',backgroundColor:'rgba(75,194,196,.12)',tension:.25,fill:true,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:selected==='__all__'?'Overall performance trend':selected+' performance trend'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+  const latest=list[list.length-1], latestRows=subjectNames().map(sub=>({subject:sub, percent:examPercent(latest.scores?.[sub])})).filter(x=>x.percent!==null);
+  charts.examLatest=new Chart($('examLatestChart'),{type:'bar',data:{labels:latestRows.map(x=>x.subject),datasets:[{label:'Score %',data:latestRows.map(x=>x.percent),backgroundColor:'#ee4977'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Latest exam by subject'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
+}
+function openExamModal(id=''){
+  if(!hasSyllabus()){ alert('Upload or import a syllabus first.'); return; }
+  const ex=id?exams().find(x=>x.id===id):null;
+  $('examEditId').value=id||''; $('examModalTitle').textContent=ex?'Edit examination':'Add examination'; $('examName').value=ex?.name||''; $('examDate').value=ex?.date||new Date().toISOString().slice(0,10);
+  $('examSubjectRows').innerHTML=subjectNames().map(sub=>{const sc=ex?.scores?.[sub]||{}; return `<div class="exam-row" data-subject="${safe(sub)}"><div class="exam-subject-name">${safe(sub)}</div><input class="input" type="number" min="0" step="0.01" placeholder="Scored" data-role="obtained" value="${safe(sc.obtained??'')}"><input class="input" type="number" min="0" step="0.01" placeholder="Total" data-role="total" value="${safe(sc.total??'')}"></div>`;}).join('');
+  $('examModal').classList.remove('hidden');
+}
+function closeExamModal(){ $('examModal').classList.add('hidden'); }
+function saveExamModal(){
+  const name=$('examName').value.trim(); if(!name){ alert('Enter examination name.'); return; }
+  const id=$('examEditId').value || 'exam_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7);
+  const scores={};
+  document.querySelectorAll('#examSubjectRows .exam-row').forEach(row=>{
+    const sub=row.dataset.subject || row.querySelector('.exam-subject-name')?.textContent?.trim();
+    const o=row.querySelector('[data-role="obtained"]')?.value;
+    const t=row.querySelector('[data-role="total"]')?.value;
+    if(sub && (o!=='' || t!=='')) scores[sub]={obtained:Number(o||0), total:Number(t||0)};
+  });
+  if(!Object.values(scores).some(sc=>Number(sc.total)>0)){
+    alert('Enter marks for at least one subject.');
+    return;
+  }
+  const exam={id,name,date:$('examDate').value,scores,updatedAt:new Date().toISOString()};
+  const list=exams(); const idx=list.findIndex(x=>x.id===id); if(idx>=0) list[idx]=exam; else list.push(exam);
+  save(); closeExamModal(); renderPerformance(); showTab('performance'); setStatus('Examination saved.');
+}
+function deleteExam(id){ const ex=exams().find(x=>x.id===id); if(!ex)return; if(!confirm(`Delete ${ex.name}?`))return; plan.performance.exams=exams().filter(x=>x.id!==id); save(); renderPerformance(); }
+function resetPerformance(){ if(!confirm('Reset all examination records? Syllabus and topic progress will remain.'))return; plan.performance={exams:[]}; save(); renderPerformance(); setStatus('Performance history reset.'); }
+function exportPerformance(){ download({learnerName:plan.learnerName||'', syllabusTitle:plan.syllabus?.title||'', exams:exams()}, 'my-plan-performance.json'); }
+
+function renderReview(){
+  const box=$('reviewContent'); if(!hasSyllabus()){box.innerHTML='<div class="empty">No syllabus loaded.</div>';return;}
+  const doneTopics=[]; plan.syllabus.subjects.forEach(s=>s.chapters.forEach(c=>c.topics.forEach(t=>{const p=plan.progress.topics[t.id]; if(p?.state||p?.done) doneTopics.push({subject:s.name,chapter:c.name,topic:t.name,state:p.state||'Well Prepared',note:p.note||'',updatedAt:p.updatedAt});})));
+  box.innerHTML=doneTopics.length?doneTopics.sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||'')).map(x=>`<div class="review-card"><b>${safe(x.topic)}</b><div class="muted">${safe(x.subject)} • ${safe(x.chapter)}</div><div class="pill">${safe(x.state)}</div>${x.note?`<p>${safe(x.note)}</p>`:''}</div>`).join(''):'<div class="empty">No topic status has been set yet.</div>'; 
+}
+function renderSettings(){
+  $('settingsSummary').innerHTML=hasSyllabus()?`${safe(plan.syllabus.title)} • ${countAll().topics} topics`:'No syllabus loaded';
+}
+
+function buildStatusModal(){
+  if($('statusModal')) return;
+  const div=document.createElement('div');
+  div.id='statusModal'; div.className='modal-backdrop hidden';
+  div.innerHTML=`<div class="modal gentle-modal"><div class="modal-head gentle"><h2 id="statusModalTitle" style="margin:0">How prepared are you?</h2><p id="statusModalSub" style="margin:6px 0 0;opacity:.8"></p></div><div class="modal-body"><div class="state-grid"><button class="state" data-state="Well Prepared"><span class="status-dot state-well"></span><b>Well Prepared</b><small>I can answer this confidently.</small></button><button class="state" data-state="Prepared"><span class="status-dot state-prepared"></span><b>Prepared</b><small>I know this, but revision may help.</small></button><button class="state" data-state="Preparing"><span class="status-dot state-preparing"></span><b>Preparing</b><small>I am working on it.</small></button><button class="state" data-state="Not Prepared"><span class="status-dot state-not"></span><b>Not Prepared</b><small>I need to start or relearn this.</small></button></div><label class="note-label"><b>Optional note</b><textarea class="input" id="statusNote" rows="3" placeholder="What is weak, left, or planned?"></textarea></label></div><div class="modal-foot"><button class="btn ghost" id="statusCancel">Cancel</button></div></div>`;
+  document.body.appendChild(div);
+  $('statusCancel').addEventListener('click',closeStatusModal);
+}
+function openStatusModal(type,id){
+  const target=type==='chapter'?findChapter(id):findTopic(id); if(!target)return;
+  $('statusModal').dataset.type=type; $('statusModal').dataset.id=id;
+  $('statusModalTitle').textContent= type==='chapter' ? 'Set this chapter status' : 'How prepared are you?';
+  $('statusModalSub').textContent= target.name;
+  $('statusNote').value = type==='topic' ? (topicRecord(id).note||'') : '';
+  document.querySelectorAll('#statusModal .state').forEach(btn=>{ btn.classList.remove('selected'); btn.onclick=()=>saveStatusChoice(btn.dataset.state); });
+  $('statusModal').classList.remove('hidden');
+}
+function closeStatusModal(){ $('statusModal').classList.add('hidden'); }
+function saveStatusChoice(state){
+  const type=$('statusModal').dataset.type, id=$('statusModal').dataset.id, note=$('statusNote').value.trim();
+  if(type==='chapter') markChapter(id,state); else { setTopicState(id,state,note); save(); renderAll(); }
+  closeStatusModal();
+}
+
+function openModal(type,id){
+  const target = type==='subject'?findSubject(id):type==='chapter'?findChapter(id):findTopic(id);
+  if(!target)return;
+  $('modalTitle').textContent=`Edit ${type}`; $('modalName').value=target.name; $('modalType').value=type; $('modalId').value=id; $('editModal').classList.remove('hidden');
+}
+function closeModal(){ $('editModal').classList.add('hidden'); }
+function saveModal(){ const type=$('modalType').value,id=$('modalId').value,name=$('modalName').value.trim(); if(!name)return; const target=type==='subject'?findSubject(id):type==='chapter'?findChapter(id):findTopic(id); if(target){target.name=name; save(); renderAll(); closeModal();} }
+function deleteModalTarget(){
+  const type=$('modalType').value,id=$('modalId').value; if(!confirm(`Delete this ${type}?`))return;
+  if(type==='subject') deleteSubject(id);
+  if(type==='chapter'){ plan.syllabus.subjects.forEach(s=>{s.chapters=s.chapters.filter(c=>{ if(c.id===id){c.topics.forEach(t=>delete plan.progress.topics[t.id]); return false;} return true;});}); save(); renderAll(); }
+  if(type==='topic'){ plan.syllabus.subjects.forEach(s=>s.chapters.forEach(c=>{c.topics=c.topics.filter(t=>t.id!==id); delete plan.progress.topics[id];})); save(); renderAll(); }
+  closeModal();
+}
+function resetProgress(){ if(!confirm('Reset all progress? Syllabus will remain.'))return; plan.progress={topics:{},notes:{}}; save(); renderAll(); }
+function resetAll(){ if(!confirm('Reset everything? This removes the syllabus and progress from this browser.'))return; localStorage.removeItem(STORE); plan=emptyPlan(); renderAll(); showTab('setup'); setStatus('Everything reset.'); }
+function exportSyllabus(){ if(!hasSyllabus())return alert('No syllabus loaded.'); download(plan.syllabus, 'my-plan-syllabus.json'); }
+function exportProfile(){ download(plan, 'my-plan-profile.json'); }
+function download(obj,name){ const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; a.click(); URL.revokeObjectURL(url); }
+function exportPdfReport(){
+  if(!hasSyllabus()) return alert('No syllabus loaded.');
+  const c=countAll(); $('reportName').textContent=plan.learnerName||'Learner'; $('reportDate').textContent=new Date().toLocaleString(); $('reportTitle').textContent=plan.syllabus.title||'My Plan'; $('reportOverall').textContent=`${c.percent}% complete (${c.done}/${c.topics} topics)`;
+  const rows=$('reportRows'); rows.innerHTML='';
+  plan.syllabus.subjects.forEach(s=>{const r=countAll(s); const div=document.createElement('div'); div.className='report-row'; div.innerHTML=`<div><b>${safe(s.name)}</b><br><span>${r.done}/${r.topics} topics complete</span></div><b>${r.percent}%</b>`; rows.appendChild(div);});
+  const tpl=$('pdfTemplate'); tpl.classList.remove('hidden'); html2pdf().set({margin:10,filename:`My_Plan_${(plan.learnerName||'Progress').replace(/\W+/g,'_')}.pdf`,image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(tpl).save().then(()=>tpl.classList.add('hidden'));
+}
+function findSubject(id){return plan.syllabus.subjects.find(s=>s.id===id)}
+function findChapter(id){let out=null; plan.syllabus.subjects.some(s=>(out=s.chapters.find(c=>c.id===id))); return out;}
+function findTopic(id){let out=null; plan.syllabus.subjects.some(s=>s.chapters.some(c=>(out=c.topics.find(t=>t.id===id)))); return out;}
+window.MyPlanApp={getPlan:()=>plan, openExamModal};
+})();
+
+</script>
+</body>
+</html>

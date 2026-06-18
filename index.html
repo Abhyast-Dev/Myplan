@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Plan</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img src="logo.png" alt="ABHYAST logo" class="logo" onerror="this.style.display='none'" />
+        <div><h1>My Plan</h1><p>Upload your syllabus. Track it your way.</p></div>
+      </div>
+      <nav class="tabs" aria-label="Main navigation">
+        <button class="tab active" data-tab="setup">Start</button>
+        <button class="tab" data-tab="tracker">Syllabus</button>
+        <button class="tab" data-tab="progress">Progress</button>
+        <button class="tab" data-tab="performance">Performance</button>
+        <button class="tab" data-tab="review">Review</button>
+        <a class="tab external-tab"
+          href="https://able.abhyast.in"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Calendar ↗
+        </a>
+
+        <button class="tab" data-tab="settings">Settings</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card section" id="setupCard">
+      <div id="emptyMessage"><h2 class="title">Start with your syllabus</h2><p class="muted">No sample data is loaded. Add your name and upload a PDF syllabus or import JSON to begin.</p></div>
+      <div id="loadedMessage" class="hidden muted"></div>
+      <div class="onboard" style="margin-top:24px">
+        <div>
+          <div class="grid2">
+            <div class="field"><label for="studentName">Student name</label><input class="input" id="studentName" placeholder="Enter name" /></div>
+            <div class="field"><label for="pdfFile">Upload syllabus PDF</label><input class="input" type="file" id="pdfFile" accept="application/pdf,.pdf" /></div>
+          </div>
+          <div class="actions" style="margin-top:18px">
+            <button class="btn primary" id="readPdfBtn">Read PDF</button>
+            <label class="btn ghost" for="jsonFile">Import JSON</label>
+            <input class="hidden" type="file" id="jsonFile" accept="application/json,.json" />
+          </div>
+          <p class="status" id="status">PDFs are read in your browser. Your data stays on this device.</p>
+        </div>
+        <aside class="how">
+          <h3 style="margin:0">How to use</h3>
+          <ol>
+            <li>Enter the learner name.</li>
+            <li>Upload a text-based syllabus PDF or import a JSON profile.</li>
+            <li>Review the subject list and delete irrelevant sections such as B.Arch or B.Planning.</li>
+            <li>Open the collapsible hierarchy and tick topics as complete.</li>
+            <li>Use Progress for easy charts and export PDF/JSON anytime.</li>
+          </ol>
+        </aside>
+      </div>
+    </section>
+
+    <section id="parseReview" class="card section hidden">
+      <h2 class="title">Review parsed syllabus</h2><p id="parseSummary" class="muted"></p><div id="parseSubjects" class="grid3" style="margin:18px 0"></div>
+      <div class="actions"><button class="btn primary" id="confirmSaveParse">Continue to tracker</button><button class="btn ghost" id="cancelParse">Hide review</button></div>
+    </section>
+
+    <section id="setupView" class="view"></section>
+
+    <section id="trackerView" class="view hidden card section">
+      <div class="toolbar"><div><h2 class="title">Syllabus hierarchy</h2><p class="muted">Click a subject or chapter to expand. Mark a chapter to update all its topics.</p></div><div class="mini-stat" id="overallMini"></div></div>
+      <div class="toolbar"><input class="input search" id="searchInput" placeholder="Search subject, chapter, topic..." /><select class="input" id="filterSelect" style="max-width:180px"><option value="all">All topics</option><option value="pending">Pending only</option><option value="done">Completed only</option></select><div class="actions"><button class="btn ghost small" id="expandAllBtn">Expand all</button><button class="btn ghost small" id="collapseAllBtn">Collapse all</button></div></div>
+      <div class="tree" id="treeRoot"></div>
+    </section>
+
+    <section id="progressView" class="view hidden card section"><h2 class="title">Progress</h2><p class="muted">Simple charts for the full syllabus and each subject.</p><div id="progressContent" style="margin-top:18px"></div></section>
+
+    <section id="performanceView" class="view hidden card section">
+      <div class="toolbar"><div><h2 class="title">Performance</h2><p class="muted">Add examination marks by subject and view simple score charts.</p></div><button class="btn primary" id="addExamBtn">Add examination</button></div>
+      <div id="performanceContent" style="margin-top:18px"></div>
+    </section>
+
+    <section id="reviewView" class="view hidden card section"><h2 class="title">Review</h2><p class="muted">A plain-language list of completed topics.</p><div id="reviewContent" style="margin-top:18px"></div></section>
+    <section id="settingsView" class="view hidden card section"><h2 class="title">Settings</h2><p class="muted" id="settingsSummary"></p><div class="actions" style="margin-top:18px"><label class="btn ghost" for="jsonFile2">Import JSON</label><input class="hidden" type="file" id="jsonFile2" accept="application/json,.json" /><button class="btn ghost" id="exportSyllabusBtn">Export syllabus JSON</button><button class="btn ghost" id="exportProfileBtn">Export profile JSON</button><button class="btn primary" id="exportPdfBtn">Export progress PDF</button><button class="btn ghost" id="exportPerformanceBtn">Export performance JSON</button></div><div class="danger-zone" style="margin-top:22px"><h3 style="margin-top:0">Reset</h3><p class="muted">Use reset only when you want a clean start.</p><div class="actions"><button class="btn warn" id="resetProgressBtn">Reset progress only</button><button class="btn warn" id="resetPerformanceBtn">Reset performance only</button><button class="btn warn" id="resetAllBtn">Reset everything</button></div></div></section>
+  </main>
+
+  <footer class="footer" role="contentinfo"><div class="footer-container"><div class="footer-links"><a href="mailto:contact@abhyast.in"><span>📧 contact@abhyast.in</span></a><a href="https://wa.me/919910686080"><span>💬 WhatsApp Support</span></a></div><div>© 2026 Abhyast Private Limited. ABLE™ and TAKECARE™ Registered Frameworks.</div></div></footer>
+
+  <div id="editModal" class="modal-backdrop hidden"><div class="modal"><div class="modal-head"><h2 id="modalTitle" style="margin:0">Edit</h2></div><div class="modal-body"><input type="hidden" id="modalType"><input type="hidden" id="modalId"><label><b>Name</b><input class="input" id="modalName" style="margin-top:8px"></label></div><div class="modal-foot"><button class="btn warn" id="modalDelete">Delete</button><button class="btn ghost" id="modalClose">Cancel</button><button class="btn primary" id="modalSave">Save</button></div></div></div>
+
+
+  <div id="examModal" class="modal-backdrop hidden"><div class="modal gentle-modal"><div class="modal-head gentle"><h2 id="examModalTitle" style="margin:0">Add examination</h2><p class="muted" style="margin:6px 0 0">Enter marks for the subjects you attempted. Leave blank if not applicable.</p></div><div class="modal-body"><input type="hidden" id="examEditId"><div class="grid2"><label><b>Exam name</b><input class="input" id="examName" placeholder="e.g. JEE Mock Test 1" style="margin-top:8px"></label><label><b>Date</b><input class="input" id="examDate" type="date" style="margin-top:8px"></label></div><div id="examSubjectRows" class="exam-subjects"></div></div><div class="modal-foot"><button class="btn ghost" id="examCancel">Cancel</button><button class="btn primary" id="examSave">Save examination</button></div></div></div>
+
+  <div id="pdfTemplate" class="hidden"><div class="pdf-report"><div class="report-head"><div style="display:flex;gap:14px;align-items:center"><img src="logo.png" class="report-logo"><div><h1 style="margin:0;color:#272b6a">My Plan</h1><p style="margin:2px 0;color:#ee4977;font-weight:bold">Progress Report</p></div></div><div style="text-align:right;font-size:12px"><p>Student: <b id="reportName"></b></p><p>Generated: <b id="reportDate"></b></p></div></div><p><b id="reportTitle"></b></p><p id="reportOverall"></p><div id="reportRows"></div><div class="report-footer">© 2026 Abhyast Private Limited. ABLE™ and TAKECARE™ Registered Frameworks.</div></div></div>
+
+  <script src="js/parser.js"></script><script src="js/app.js"></script>
+</body>
+</html>
