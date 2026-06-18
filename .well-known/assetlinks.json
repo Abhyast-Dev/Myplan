@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.abhyast.able.twa",
+      "sha256_cert_fingerprints": ["46:6A:B2:DD:4C:E1:0D:D9:D2:49:E6:17:3E:EB:2C:E9:40:F2:1C:6F:9B:A1:61:D9:84:8C:56:17:AD:6E:DB:29"]
+    }
+  }
+]
