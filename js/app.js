@@ -89,15 +89,10 @@ function renderSetupState(){
   if(has){ const c=countAll(); $('loadedMessage').innerHTML=`<b>${safe(plan.syllabus.title||'Loaded syllabus')}</b><br>${c.subjects} subjects • ${c.chapters} chapters • ${c.topics} topics`; }
 }
 function showTab(tab){
-  $('setupCard').classList.add('hidden');
   activeTab=tab;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
   document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
-  const target = tab === 'setup'
-  ? $('setupCard')
-  : $(tab + 'View');
-
-  target?.classList.remove('hidden');
+  const target = tab==='setup' ? $('setupCard') : $(tab+'View');
   if(tab!=='setup' && target) target.classList.remove('hidden');
   if(tab==='progress') renderProgress();
   if(tab==='review') renderReview();
@@ -298,56 +293,8 @@ function deleteModalTarget(){
   closeModal();
 }
 function resetProgress(){ if(!confirm('Reset all progress? Syllabus will remain.'))return; plan.progress={topics:{},notes:{}}; save(); renderAll(); }
-function resetAll() {
-  if (!confirm('Start over? This will remove syllabus, progress, performance and review data.')) {
-    return;
-  }
-
-  // Storage
-  localStorage.removeItem(STORE);
-
-  // Runtime state
-  plan = emptyPlan();
-  openNodes.clear();
-
-  // Destroy charts
-  Object.values(charts).forEach(ch => {
-    try { ch.destroy(); } catch(e) {}
-  });
-  charts = {};
-
-  // Clear file inputs
-  $('pdfFile').value = '';
-  $('jsonFile').value = '';
-  $('jsonFile2').value = '';
-  $('studentName').value = '';
-
-  // Clear parse review
-  $('parseSubjects').innerHTML = '';
-  $('parseSummary').textContent = '';
-  $('parseReview').classList.add('hidden');
-
-  // Clear visible content
-  $('treeRoot').innerHTML = '';
-  $('progressContent').innerHTML = '';
-  $('performanceContent').innerHTML = '';
-  $('reviewContent').innerHTML = '';
-
-  // Reset setup messages
-  $('loadedMessage').innerHTML = '';
-  $('loadedMessage').classList.add('hidden');
-  $('emptyMessage').classList.remove('hidden');
-
-  // Re-render
-  renderAll();
-
-  // Return to Start
-  showTab('setup');
-  openNodes.clear();
-
-  setStatus('Everything has been reset. Upload a syllabus to begin again.');
-}
-  function exportSyllabus(){ if(!hasSyllabus())return alert('No syllabus loaded.'); download(plan.syllabus, 'my-plan-syllabus.json'); }
+function resetAll(){ if(!confirm('Reset everything? This removes the syllabus and progress from this browser.'))return; localStorage.removeItem(STORE); plan=emptyPlan(); renderAll(); showTab('setup'); setStatus('Everything reset.'); }
+function exportSyllabus(){ if(!hasSyllabus())return alert('No syllabus loaded.'); download(plan.syllabus, 'my-plan-syllabus.json'); }
 function exportProfile(){ download(plan, 'my-plan-profile.json'); }
 function download(obj,name){ const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; a.click(); URL.revokeObjectURL(url); }
 function exportPdfReport(){
