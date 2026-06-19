@@ -13,31 +13,84 @@ function init(){
   renderAll();
 }
 function bind(){
-  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>showTab(btn.dataset.tab)));
-  $('studentName').addEventListener('input', e=>{ if(!plan) plan=emptyPlan(); plan.learnerName=e.target.value.trim(); save(); renderHeader(); });
-  $('readPdfBtn').addEventListener('click', readPdf);
-  $('pdfFile').addEventListener('change',()=>{ const f=$('pdfFile').files[0]; setStatus(f ? `PDF selected: ${f.name}. Click Read PDF to continue.` : 'Choose a PDF first.'); });
-  $('jsonFile').addEventListener('change', importJsonFile);
-  $('jsonFile2').addEventListener('change', importJsonFile);
-  $('exportSyllabusBtn').addEventListener('click', exportSyllabus);
-  $('exportProfileBtn').addEventListener('click', exportProfile);
-  $('exportPdfBtn').addEventListener('click', exportPdfReport);
-  $('exportPerformanceBtn')?.addEventListener('click', exportPerformance);
-  $('addExamBtn')?.addEventListener('click', ()=>openExamModal());
-  $('resetProgressBtn').addEventListener('click', resetProgress);
+  document
+    .querySelectorAll('.tab[data-tab]')
+    .forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
+
+  $('studentName')?.addEventListener('input', e => {
+    if(!plan) plan = emptyPlan();
+    plan.learnerName = e.target.value.trim();
+    save();
+    renderHeader();
+  });
+
+  $('readPdfBtn')?.addEventListener('click', readPdf);
+
+  $('pdfFile')?.addEventListener('change', () => {
+    const f = $('pdfFile')?.files?.[0];
+    setStatus(f ? `PDF selected: ${f.name}. Click Read PDF to continue.` : 'Choose a PDF first.');
+  });
+
+  $('exportPdfBtn')?.addEventListener('click', exportPdfReport);
+  $('addExamBtn')?.addEventListener('click', () => openExamModal());
+
+  $('resetProgressBtn')?.addEventListener('click', resetProgress);
   $('resetPerformanceBtn')?.addEventListener('click', resetPerformance);
-  $('resetAllBtn').addEventListener('click', resetAll);
-  $('searchInput').addEventListener('input', renderTracker);
-  $('filterSelect').addEventListener('change', renderTracker);
-  $('expandAllBtn').addEventListener('click',()=>{document.querySelectorAll('.node').forEach(n=>{n.classList.add('open'); if(n.dataset.nodeId) openNodes.add(n.dataset.nodeId);});});
-  $('collapseAllBtn').addEventListener('click',()=>{document.querySelectorAll('.node').forEach(n=>{n.classList.remove('open'); if(n.dataset.nodeId) openNodes.delete(n.dataset.nodeId);});});
-  $('confirmSaveParse').addEventListener('click',()=>{ save(); showTab('tracker'); setStatus('Syllabus loaded. Open a topic and choose how prepared you are.'); });
-  $('cancelParse').addEventListener('click',()=>{ $('parseReview').classList.add('hidden'); });
-  $('modalClose').addEventListener('click', closeModal);
-  $('modalSave').addEventListener('click', saveModal);
-  $('modalDelete').addEventListener('click', deleteModalTarget);
+  $('resetAllBtn')?.addEventListener('click', resetAll);
+
+  $('searchInput')?.addEventListener('input', renderTracker);
+  $('filterSelect')?.addEventListener('change', renderTracker);
+
+  $('expandAllBtn')?.addEventListener('click', () => {
+    document.querySelectorAll('.node').forEach(n => {
+      n.classList.add('open');
+      if(n.dataset.nodeId) openNodes.add(n.dataset.nodeId);
+    });
+  });
+
+  $('collapseAllBtn')?.addEventListener('click', () => {
+    document.querySelectorAll('.node').forEach(n => {
+      n.classList.remove('open');
+      if(n.dataset.nodeId) openNodes.delete(n.dataset.nodeId);
+    });
+  });
+
+  $('confirmSaveParse')?.addEventListener('click', () => {
+    save();
+    $('parseReview')?.classList.add('hidden');
+    showTab('tracker');
+    setStatus('Syllabus loaded. Open a topic and choose how prepared you are.');
+  });
+
+  $('cancelParse')?.addEventListener('click', e => {
+    e.preventDefault();
+    $('parseReview')?.classList.add('hidden');
+  });
+
+  $('modalClose')?.addEventListener('click', closeModal);
+  $('modalSave')?.addEventListener('click', saveModal);
+  $('modalDelete')?.addEventListener('click', deleteModalTarget);
+
   $('examCancel')?.addEventListener('click', closeExamModal);
   $('examSave')?.addEventListener('click', saveExamModal);
+
+  $('editModal')?.addEventListener('click', e => {
+    if(e.target === $('editModal')) closeModal();
+  });
+
+  $('examModal')?.addEventListener('click', e => {
+    if(e.target === $('examModal')) closeExamModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){
+      closeModal();
+      closeExamModal();
+      closeStatusModal();
+      $('parseReview')?.classList.add('hidden');
+    }
+  });
+
   buildStatusModal();
 }
 function emptyPlan(){ return {version:'MY_PLAN_1', createdAt:new Date().toISOString(), learnerName:'', syllabus:{title:'',source:'',subjects:[]}, progress:{topics:{}, notes:{}}, performance:{exams:[]}}; }
@@ -62,10 +115,10 @@ async function readPdf(){
     setStatus(`Loaded ${countAll().topics} topics from ${file.name}.`);
   }catch(err){
     console.error(err);
-    setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'unknown error') + '. Try Import JSON, or check that this is a text-based PDF.');
+    setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'unknown error') + '. Please check that this is a text-based PDF.');
   }finally{ $('readPdfBtn').disabled=false; }
 }
-function importJsonFile(e){
+/*function importJsonFile(e){
   const file=e.target.files[0]; if(!file) return;
   const reader=new FileReader();
   reader.onload=ev=>{
@@ -79,7 +132,7 @@ function importJsonFile(e){
     }catch(err){ console.error(err); setStatus('This JSON format is not supported.'); alert('This JSON format is not supported.'); }
   };
   reader.readAsText(file);
-}
+}*/
 function renderAll(){ renderHeader(); renderSetupState(); renderTracker(); renderProgress(); renderPerformance(); renderReview(); renderSettings(); }
 function renderHeader(){ $('studentName').value=plan?.learnerName||''; }
 function renderSetupState(){
@@ -89,16 +142,30 @@ function renderSetupState(){
   if(has){ const c=countAll(); $('loadedMessage').innerHTML=`<b>${safe(plan.syllabus.title||'Loaded syllabus')}</b><br>${c.subjects} subjects • ${c.chapters} chapters • ${c.topics} topics`; }
 }
 function showTab(tab){
-  activeTab=tab;
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
-  const target = tab==='setup' ? $('setupCard') : $(tab+'View');
-  if(tab!=='setup' && target) target.classList.remove('hidden');
-  if(tab==='progress') renderProgress();
-  if(tab==='review') renderReview();
-  if(tab==='performance') renderPerformance();
-  if(tab==='tracker') renderTracker();
-  requestAnimationFrame(()=> (target || document.querySelector('main')).scrollIntoView({behavior:'smooth', block:'start'}));
+  if(!tab) return;
+  activeTab = tab;
+
+  document
+    .querySelectorAll('.tab[data-tab]')
+    .forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+
+  document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+  $('setupCard')?.classList.add('hidden');
+
+  const target = tab === 'setup' ? $('setupCard') : $(tab + 'View');
+  target?.classList.remove('hidden');
+
+  if(tab === 'progress') renderProgress();
+  if(tab === 'review') renderReview();
+  if(tab === 'performance') renderPerformance();
+  if(tab === 'tracker') renderTracker();
+
+  requestAnimationFrame(() => {
+    (target || document.querySelector('main'))?.scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+  });
 }
 function hasSyllabus(){ return !!(plan?.syllabus?.subjects?.length); }
 function countAll(subject){
@@ -120,7 +187,7 @@ function renderParseReview(){
 }
 function renderTracker(){
   const root=$('treeRoot');
-  if(!hasSyllabus()){ root.innerHTML='<div class="empty">Upload a PDF or import JSON to see the hierarchy.</div>'; return; }
+  if(!hasSyllabus()){ root.innerHTML='<div class="empty">Upload a PDF to see the hierarchy.</div>'; return; }
   const q=($('searchInput').value||'').toLowerCase().trim(), filter=$('filterSelect').value;
   root.innerHTML='';
   plan.syllabus.subjects.forEach(subject=>{
@@ -216,13 +283,13 @@ function drawPerformanceCharts(){
   charts.examLatest=new Chart($('examLatestChart'),{type:'bar',data:{labels:latestRows.map(x=>x.subject),datasets:[{label:'Score %',data:latestRows.map(x=>x.percent),backgroundColor:'#ee4977'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Latest exam by subject'}},scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}}}}});
 }
 function openExamModal(id=''){
-  if(!hasSyllabus()){ alert('Upload or import a syllabus first.'); return; }
+  if(!hasSyllabus()){ alert('Upload a syllabus first.'); return; }
   const ex=id?exams().find(x=>x.id===id):null;
   $('examEditId').value=id||''; $('examModalTitle').textContent=ex?'Edit examination':'Add examination'; $('examName').value=ex?.name||''; $('examDate').value=ex?.date||new Date().toISOString().slice(0,10);
   $('examSubjectRows').innerHTML=subjectNames().map(sub=>{const sc=ex?.scores?.[sub]||{}; return `<div class="exam-row" data-subject="${safe(sub)}"><div class="exam-subject-name">${safe(sub)}</div><input class="input" type="number" min="0" step="0.01" placeholder="Scored" data-role="obtained" value="${safe(sc.obtained??'')}"><input class="input" type="number" min="0" step="0.01" placeholder="Total" data-role="total" value="${safe(sc.total??'')}"></div>`;}).join('');
   $('examModal').classList.remove('hidden');
 }
-function closeExamModal(){ $('examModal').classList.add('hidden'); }
+function closeExamModal(){ $('examModal')?.classList.add('hidden'); }
 function saveExamModal(){
   const name=$('examName').value.trim(); if(!name){ alert('Enter examination name.'); return; }
   const id=$('examEditId').value || 'exam_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7);
@@ -271,7 +338,7 @@ function openStatusModal(type,id){
   document.querySelectorAll('#statusModal .state').forEach(btn=>{ btn.classList.remove('selected'); btn.onclick=()=>saveStatusChoice(btn.dataset.state); });
   $('statusModal').classList.remove('hidden');
 }
-function closeStatusModal(){ $('statusModal').classList.add('hidden'); }
+function closeStatusModal(){ $('statusModal')?.classList.add('hidden'); }
 function saveStatusChoice(state){
   const type=$('statusModal').dataset.type, id=$('statusModal').dataset.id, note=$('statusNote').value.trim();
   if(type==='chapter') markChapter(id,state); else { setTopicState(id,state,note); save(); renderAll(); }
@@ -283,7 +350,7 @@ function openModal(type,id){
   if(!target)return;
   $('modalTitle').textContent=`Edit ${type}`; $('modalName').value=target.name; $('modalType').value=type; $('modalId').value=id; $('editModal').classList.remove('hidden');
 }
-function closeModal(){ $('editModal').classList.add('hidden'); }
+function closeModal(){ $('editModal')?.classList.add('hidden'); }
 function saveModal(){ const type=$('modalType').value,id=$('modalId').value,name=$('modalName').value.trim(); if(!name)return; const target=type==='subject'?findSubject(id):type==='chapter'?findChapter(id):findTopic(id); if(target){target.name=name; save(); renderAll(); closeModal();} }
 function deleteModalTarget(){
   const type=$('modalType').value,id=$('modalId').value; if(!confirm(`Delete this ${type}?`))return;
@@ -293,7 +360,41 @@ function deleteModalTarget(){
   closeModal();
 }
 function resetProgress(){ if(!confirm('Reset all progress? Syllabus will remain.'))return; plan.progress={topics:{},notes:{}}; save(); renderAll(); }
-function resetAll(){ if(!confirm('Reset everything? This removes the syllabus and progress from this browser.'))return; localStorage.removeItem(STORE); plan=emptyPlan(); renderAll(); showTab('setup'); setStatus('Everything reset.'); }
+function resetAll(){
+  if(!confirm('Start over? This removes syllabus, progress, performance and review data from this browser.')) return;
+
+  localStorage.removeItem(STORE);
+  plan = emptyPlan();
+  openNodes.clear();
+
+  Object.values(charts).forEach(ch => {
+    try { ch?.destroy?.(); } catch(e) {}
+  });
+  charts = {};
+
+  ['pdfFile','studentName'].forEach(id => {
+    const el = $(id);
+    if(el) el.value = '';
+  });
+
+  $('parseSubjects') && ($('parseSubjects').innerHTML = '');
+  $('parseSummary') && ($('parseSummary').textContent = '');
+  $('parseReview')?.classList.add('hidden');
+
+  $('treeRoot') && ($('treeRoot').innerHTML = '');
+  $('progressContent') && ($('progressContent').innerHTML = '');
+  $('performanceContent') && ($('performanceContent').innerHTML = '');
+  $('reviewContent') && ($('reviewContent').innerHTML = '');
+  $('overallMini') && ($('overallMini').innerHTML = '');
+
+  closeModal();
+  closeExamModal();
+  closeStatusModal();
+
+  renderAll();
+  showTab('setup');
+  setStatus('Everything has been reset. Upload a syllabus to begin again.');
+}
 function exportSyllabus(){ if(!hasSyllabus())return alert('No syllabus loaded.'); download(plan.syllabus, 'my-plan-syllabus.json'); }
 function exportProfile(){ download(plan, 'my-plan-profile.json'); }
 function download(obj,name){ const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; a.click(); URL.revokeObjectURL(url); }
